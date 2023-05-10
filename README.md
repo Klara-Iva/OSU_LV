@@ -1,4 +1,4 @@
-#LV1- Uvod u programski jezik,
+#LV1- Uvod u programski jezik,\n
 #LV2- Numpy(manipuliranje podacima),Matplotlib, manipuliranje slike(rotacija, posvjeljivanje)
 #LV3- Pandas(manipuliranje podacima/odabranim),histogram, dijagram rasprsenja i stupicasti
 #LV4- Linearni regresijski model,vrednovanje modela/metrike,OneHotEncoder,minMax skalirnaje,
