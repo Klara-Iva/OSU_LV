@@ -12,6 +12,13 @@ import math
 
 # ucitaj podatke
 data = pd.read_csv('data_C02_emission.csv')
+# podaci iz drugacijih datoteka se mogu ucitati i s:
+# somedata = datasets.name_of_dataset()
+# df = pd.DataFrame(data=somedata.data, columns=somedata.feature_names)
+# df['target'] = somedata.target
+# df.to_csv('somedata.csv', index=False)
+# print(df.info)
+
 
 # drop sve kategoriske velicine tj one s tekstom
 data = data.drop(["Make", "Model"], axis=1)

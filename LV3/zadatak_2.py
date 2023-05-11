@@ -43,9 +43,11 @@ data2.plot.bar(x='vrste goriva', y='broj auta', rot=0)
 
 # e)
 plt.figure()
+plt.ylabel("CO2 Emissions (g/km)")
+
 data3 = data.groupby('Cylinders')['CO2 Emissions (g/km)'].mean()
-data3.plot.bar(x='broj cilindara', y='CO2 emisije', rot=0)
+data3.plot.bar(x='broj cilindara', y='CO2 emisije', rot=0).set_title(
+    "odnos izmedu CO2 emisije i broja cilindara")
+plt.xlabel("numer of cylinders")
 plt.legend()
-
-
 plt.show()

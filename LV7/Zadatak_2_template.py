@@ -27,7 +27,7 @@ img_array_aprox = img_array.copy()
 # binarno prebaci boje u 1 ili 0, pa ce bit ili ne biti
 
 
-clusters = 4
+clusters = 3
 # pretvori vrijednosti elemenata slike u raspon 0 do 1
 img = img.astype(np.float64) / 255
 
@@ -62,3 +62,17 @@ for i in range(clusters):
     y = i % 2
     plt.imshow(binary_img)
     plt.show()
+
+
+# Lakat metoda za odredivanje najboljeg K
+distortions = []
+# veci range da bude bolje prikazano sto je najbolje upotrijebit
+K = range(1, 15)
+for k in K:
+    kmm = KMeans(n_clusters=k, init='random', n_init=5, random_state=0)
+    kmm.fit(img_array_aprox)
+    distortions.append(kmm.inertia_)
+
+plt.figure()
+plt.plot(K, distortions)
+plt.show()

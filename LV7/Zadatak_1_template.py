@@ -41,8 +41,7 @@ def generate_data(n_samples, flagc):
 
 # generiranje podatkovnih primjera
 X = generate_data(500, 1)
-
-# prikazi primjere u obliku dijagrama rasprsenja
+# prikazi primjere u obliku dijagrama rasprsenja-bez boja samo obicni generirani podaci
 plt.figure()
 plt.scatter(X[:, 0], X[:, 1])
 plt.xlabel('$x_1$')
@@ -50,22 +49,34 @@ plt.ylabel('$x_2$')
 plt.title('podatkovni primjeri')
 plt.show()
 
-X = generate_data(500, 1)
 
+X = generate_data(500, 1)
+# ako imamo gotove podatke->X = data.iloc[:, :-1].values
+
+
+# Kmeans metoda za odredivanje centroida
 km = KMeans(n_clusters=3, init='random', n_init=5, random_state=0)
 km.fit(X)
 labels = km.predict(X)
 
+
 # prikazi primjere u obliku dijagrama rasprsenja
 plt.figure()
 plt.scatter(X[:, 0], X[:, 1], c=labels)
+plt.scatter(km.cluster_centers_[:, 0], km.cluster_centers_[
+            :, 1], s=250, marker='*', c='red', label='Centroids')
 plt.xlabel('$x_1$')
 plt.ylabel('$x_2$')
+plt.legend()
 plt.title('podatkovni primjeri')
 plt.show()
+# za vise grupa, mogao bi se koristit i kod:
+# plt.scatter(X[labels == 0, 0], X[labels == 0, 1], s=50, c='lightgreen',  label='Grupa 1')
+# plt.scatter(X[labels == 1, 0], X[labels == 1, 1], s=50, c='orange',  label='Grupa 2')
+# plt.scatter(X[labels == 2, 0], X[labels == 2, 1], s=50, c='lightblue', label='Grupa 3')
 
 
-# Lakat metoda za odredivanje najboljeg K
+# Lakat metoda za odredivanje najboljeg K- trebala bi se prvo ona obavit a onda scatteri
 distortions = []
 # veci range da bude bolje prikazano sto je najbolje upotrijebit
 K = range(1, 15)
@@ -77,6 +88,13 @@ for k in K:
 plt.figure()
 plt.plot(K, distortions)
 plt.show()
+
+
+# tocnost KMeans mozemo izracunati prema:
+# y_true = data.iloc[:, -1].values
+# accuracy = np.mean(y_true == labels)
+# print("tocnost je:" ,accuracy)
+
 
 # 1.1 postoji 3 grupe
 # 1.2  promjenom broja K stvara se onoliko grupa koliki je K

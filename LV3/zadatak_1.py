@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+
 data = pd.read_csv('data_C02_emission.csv')
 
 # konvertiranje kategorickih velicina u tip category

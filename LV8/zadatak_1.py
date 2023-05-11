@@ -41,7 +41,7 @@ y_test_s = keras.utils.to_categorical(y_test, num_classes)
 
 # kreiraj model pomocu keras.Sequential(); prikazi njegovu strukturu
 model = keras.Sequential()
-model.add(layers.Flatten(input_shape=input_shape))
+model.add(layers.Flatten(input_shape=input_shape)) #za input se koristi koliko polja ima ulaznih npr(4,) ako ima 4 ulazne velicine
 model.add(layers.Dense(100, activation="relu"))
 model.add(layers.Dense(50,activation="sigmoid"))
 model.add(layers.Dense(10, activation="softmax"))
@@ -55,7 +55,7 @@ model.compile ( loss ="categorical_crossentropy" ,
 
 # provedi ucenje mreze
 batch_size = 34
-epochs = 15
+epochs = 1
 history = model.fit(x_train_s ,
         y_train_s ,
         batch_size = batch_size ,
@@ -72,7 +72,7 @@ print("Test loss", scores[0])
 print("Test accuracy:", scores[1])
 
 y_test_s = np.argmax(y_test_s, axis=1)
-predi = np.argmax(predictions, axis=1)#sto ovo radi?
+predi = np.argmax(predictions, axis=1)#pretvara iz vise matrica u jednu, koristi se i kod OHEncodera
 
 confusionMatrix = ConfusionMatrixDisplay(confusion_matrix(y_test_s, predi))
 confusionMatrix.plot()
@@ -80,3 +80,16 @@ plt.show()
 
 # spremi model
 model.save("model.keras")
+
+
+#za ucitavanje modela moze se koristiti i:
+#model = load_model('model.keras')
+#score = model.evaluate(X_test_n, y_test, verbose=0)
+#print('Tocnost na testnom skupu podataka: ',score[1])
+
+#predictions = model.predict (X_test_n )
+#predictions=np.around(predictions).astype(np.int32)
+#cm=confusion_matrix(y_test,predictions)
+#cm_disp=ConfusionMatrixDisplay(cm)
+#cm_disp.plot()
+#plt.show()

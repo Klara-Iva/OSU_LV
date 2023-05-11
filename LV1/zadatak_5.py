@@ -5,7 +5,7 @@ spamExclamation = 0
 spamAvg = 0.0
 hamAvg = 0.0
 for line in file:
-    line = line.rstrip()
+    line = line.rstrip()#uklanja praznine s desne strane
     line = line.split()
     if line[0] == 'ham':
         ham += 1
@@ -13,7 +13,7 @@ for line in file:
     else:
         spam += 1
         spamAvg += (len(line)-1)
-        if line[-1].endswith('!'):
+        if line[-1].endswith('!'): #koristi se -1 za posljednji element, a -2 za predposljednji i tako dalje
             spamExclamation += 1
 file.close()
 print("Average number of ham SMS: ", hamAvg/ham)

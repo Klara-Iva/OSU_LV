@@ -10,13 +10,13 @@ from matplotlib import pyplot as plt
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
 # prikazi 9 slika iz skupa za ucenje
-#plt.figure()
-#for i in range(9):
-   # plt.subplot(330 + 1 + i)
-  #  plt.xticks([]),plt.yticks([])
- #   plt.imshow(X_train[i])
+plt.figure()
+for i in range(9):
+    plt.subplot(330 + 1 + i)
+    plt.xticks([]),plt.yticks([])
+    plt.imshow(X_train[i])
 
-#plt.show()
+plt.show()
 
 
 # pripremi podatke (skaliraj ih na raspon [0,1]])
@@ -26,6 +26,13 @@ X_test_n = X_test.astype('float32')/ 255.0
 # 1-od-K kodiranje
 y_train = to_categorical(y_train, dtype ="uint8")
 y_test = to_categorical(y_test, dtype ="uint8")
+
+#ako koristimo bas bazu onda dijelimo na x i y i ako bude error da mismatcha (1,) i (3,) ide ovaj kod: za kategoricki klase
+#X = data[["length (cm)","width (cm)","length (m)","width (m)"]].to_numpy()
+#y = data["izlazni"].to_numpy().reshape(-1, 1)
+#encoder = OneHotEncoder()
+#y = encoder.fit_transform(y).toarray()
+
 
 # CNN mreza
 model = keras.Sequential()
@@ -66,7 +73,7 @@ model.fit(X_train_n,
 
 
 score = model.evaluate(X_test_n, y_test, verbose=0)
-print(f'Tocnost na testnom skupu podataka: {100.0*score[1]:.2f}')
+print('Tocnost na testnom skupu podataka:',score[1])
 
 #b
 #dodavanjem dropout sloja, smanjuje se tocnost na testnom skupu podataka, sto je veci broj dropouta to je manja tocnost
@@ -79,8 +86,9 @@ print(f'Tocnost na testnom skupu podataka: {100.0*score[1]:.2f}')
 
 #d
 
-#d.1
+#d.1 povecanjem velicine batcha dolazi do manjih iteracija s manjom tocnosti i vecim loss, u suprotnom-za vrlo malene batcheve treba vise epoha i vrlo dugo je trajanej jedne
 #d.2
+#s jako malom stopom ucenja gotovo ne dolazi do promjene u lossu i accucnarcyu, kod jako velikoe vriejnosti stope ucenja  je loss vlro velik a accurnacy malen
 #d.3
 #izbacivanjem slojeva iz mreze, smanjuje se vrijeme potrebno za svaku epohu ali se smanuje i tocnost na testnom skupu
 #d.4 vrijeme se smanjilo za oko polovicu pocetnog vremena, ali isto se odnosi i na tocnost koja se nije bas prepolovila ali je blizu
