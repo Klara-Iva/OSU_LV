@@ -89,6 +89,9 @@ model.save("model.keras")
 
 #predictions = model.predict (X_test_n )
 #predictions=np.around(predictions).astype(np.int32)
+##y_pred = np.argmax(predictions, axis=1)
+##y_true = np.argmax(y_test, axis=1) ovo moze ici umjesro np.around
+
 #cm=confusion_matrix(y_test,predictions)
 #cm_disp=ConfusionMatrixDisplay(cm)
 #cm_disp.plot()
