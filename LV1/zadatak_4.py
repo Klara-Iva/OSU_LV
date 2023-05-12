@@ -15,3 +15,4 @@ for key in list(dictionary_name):
 print('ukupno riječi koje se pojavljuju samo jednom: ', counter)
 
 fhand.close()
+#arr = np.loadtxt('data.csv',delimiter=',', skiprows=1, dtype=float)....drugi nacin ucitavanja datoteka
