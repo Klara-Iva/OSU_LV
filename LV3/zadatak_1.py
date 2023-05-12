@@ -16,7 +16,10 @@ print(data.describe())
 data.dropna(axis=0)
 data.drop_duplicates()
 data = data.reset_index(drop=True)
-
+#ista stvar samo se moze i s numpy
+#zero_rows = np.any(data[:, [5, 7]] == 0, axis=1)
+#new_arr = data[~zero_rows]
+#unique_arr = np.unique(new_arr, axis=0)
 # b)
 print()
 print()
