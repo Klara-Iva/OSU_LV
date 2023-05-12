@@ -12,6 +12,9 @@ X, y = make_classification(n_samples=200, n_features=2, n_redundant=0, n_informa
 # train test split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=5)
+#x_test_s = X_test.astype("float32") / 255....za logisticku regresiju bilo bi dobro skalirati podatke
+#y_train_s = y_train.astype("float32")
+
 
 # a)
 plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train,
@@ -24,7 +27,7 @@ plt.ylabel("x2")
 plt.show()
 
 # b)
-lr_model = LogisticRegression()
+lr_model = LogisticRegression()#moze se dodati u zagradu max_iter=1000 za ogrnaicavanje ili definiranje broja iteracija
 lr_model.fit(X_train, y_train)
 
 # c)
